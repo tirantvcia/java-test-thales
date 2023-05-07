@@ -1,4 +1,4 @@
-package test;
+package com.thales.dis;
 
 import org.junit.jupiter.api.Test;
 

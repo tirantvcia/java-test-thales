@@ -1,4 +1,4 @@
-package test;
+package com.thales.dis;
 
 public enum VehiclesType {
     MOTORCYCLE("M"),

@@ -1,4 +1,4 @@
-package test;
+package com.thales.dis;
 
 public enum SpotType {
     MOTORCYCLE_TYPE("M"),
