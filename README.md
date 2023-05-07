@@ -1,6 +1,6 @@
 # How to design a parking lot using object-oriented principles?
 ## Design a parking lot using object-oriented principles.
-###Parking rules
+### Parking rules
 1. The parking lot has multiple levels. Each level has multiple rows of spots.
 2. The parking lot can park motorcycles, cars, and buses.
 3. The parking lot has motorcycle spots, compact spots, and large spots.
