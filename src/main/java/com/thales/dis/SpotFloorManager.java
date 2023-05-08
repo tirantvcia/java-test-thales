@@ -3,6 +3,7 @@ package com.thales.dis;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class SpotFloorManager {
 	
@@ -20,6 +21,13 @@ public class SpotFloorManager {
 			spotLines.add(spotLineManager);
 		}
 		 return spotLines;
+	}
+
+	public boolean parkVehicleInFloorSpot(VehiclesType motorcycle) {
+		
+		Optional<SpotLineManager> motoIsCorrectlyParked = spotLines.stream().filter(lineManager -> lineManager.parkVehicleInSpotLine(motorcycle)).findFirst();
+		return motoIsCorrectlyParked.isPresent();
+		
 	}
 
 }

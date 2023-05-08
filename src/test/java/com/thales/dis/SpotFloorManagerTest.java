@@ -50,5 +50,63 @@ public class SpotFloorManagerTest {
         spotslinesResult.stream().forEach(spotLineManager -> spotLineManager.getNumberFreeSpotyByType().forEach((type, numElments) ->  assertEquals(1, numElments)));
     }
     
+    @Test
+    void ParkingOneMotosIsPermittedInGeneratedLines() {
+        SpotFloorManager manager = new SpotFloorManager();
+        int numberOfSpotLines = 2;
+        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
+        numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
+        List<SpotLineManager> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
+        assertEquals(2, spotslinesResult.size());
+        assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.MOTORCYCLE));
+         
+    }
+    
+    @Test
+    void ParkingOneBusIsNotPermittedInGeneratedLines() {
+        SpotFloorManager manager = new SpotFloorManager();
+        int numberOfSpotLines = 2;
+        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
+        numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
+        List<SpotLineManager> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
+        assertEquals(2, spotslinesResult.size());
+        assertEquals(false, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
+         
+    }
+    
+    @Test
+    void ParkingOnlyTwoBusesIsPermittedInGeneratedLines() {
+        SpotFloorManager manager = new SpotFloorManager();
+        int numberOfSpotLines = 2;
+        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
+        numberSpotsByType.put(SpotType.LARGE_TYPE, 5);
+        List<SpotLineManager> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
+        assertEquals(2, spotslinesResult.size());
+        assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
+        assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
+        assertEquals(false, manager.parkVehicleInFloorSpot(VehiclesType.BUS)); 
+    }
+    @Test
+    void ParkingTwoBusesAndTwoCarsIsPermittedInGeneratedLines() {
+        SpotFloorManager manager = new SpotFloorManager();
+        int numberOfSpotLines = 2;
+        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
+        numberSpotsByType.put(SpotType.LARGE_TYPE, 5);
+        List<SpotLineManager> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
+        assertEquals(2, spotslinesResult.size());
+        assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
+        assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
+        assertEquals(false, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
+        assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.CAR));
+        assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.CAR));
+    }
     
 }
