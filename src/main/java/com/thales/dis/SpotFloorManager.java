@@ -5,10 +5,20 @@ import java.util.List;
 import java.util.Map;
 
 public class SpotFloorManager {
+	
+	
+	ArrayList<SpotLineManager> spotLines = null;
+	
+	public SpotFloorManager() {
+		spotLines = new ArrayList<SpotLineManager>();
+	}
 
 	public List<SpotLineManager> generate(int numberOfSpotLines, Map<SpotType, Integer> numberSpotsByType) {
-		 ArrayList<SpotLineManager> spotLines = new ArrayList<SpotLineManager>();
-		 spotLines.add(new SpotLineManager());
+		for(int i = 0; i < numberOfSpotLines; i++) {
+			SpotLineManager spotLineManager = new SpotLineManager();
+			spotLineManager.generate(numberSpotsByType);
+			spotLines.add(spotLineManager);
+		}
 		 return spotLines;
 	}
 
