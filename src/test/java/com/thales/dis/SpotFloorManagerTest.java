@@ -108,5 +108,18 @@ public class SpotFloorManagerTest {
         assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.CAR));
         assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.CAR));
     }
-    
+    @Test
+    void ParkingFloorInformationWithTotalFreeSpotsByType() {
+        SpotFloorManager manager = new SpotFloorManager();
+        int numberOfSpotLines = 2;
+        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
+        numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
+        List<SpotLineManager> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
+        assertEquals(2, spotslinesResult.size());
+        assertEquals(2, manager.getTotalFreeSpotsByType().get(SpotType.MOTORCYCLE_TYPE));
+        assertEquals(2, manager.getTotalFreeSpotsByType().get(SpotType.COMPACT_TYPE));
+        assertEquals(2, manager.getTotalFreeSpotsByType().get(SpotType.LARGE_TYPE));
+    }    
 }
