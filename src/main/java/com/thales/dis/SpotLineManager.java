@@ -22,9 +22,11 @@ public class SpotLineManager {
 
     public void reset () {
         rows = new ArrayList<>();
+        this.numberFreeSpotyByType = null;
     }
 
     public List<Spot> generate (Map<SpotType, Integer> spotDitributionByType) {
+    	reset();
         spotDitributionByType.forEach((type, numElments) ->  generateRowsOfSameType(type, numElments));
         this.numberFreeSpotyByType = spotDitributionByType;
         return rows;
