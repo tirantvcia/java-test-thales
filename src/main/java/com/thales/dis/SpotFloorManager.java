@@ -10,26 +10,53 @@ public class SpotFloorManager {
 	
 	
 	ArrayList<SpotLineManager> spotLines = null;
-	Map<SpotType, Integer> totalFreeSpotsByType = new HashMap<>();
+	Map<SpotType, Integer> totalFreeSpotsByType = null;
 	
 	public SpotFloorManager() {
-		spotLines = new ArrayList<SpotLineManager>();
+		
 	}
 
 	public List<SpotLineManager> generate(int numberOfSpotLines, Map<SpotType, Integer> numberSpotsByType) {
+		reset();
+		
 		for(int i = 0; i < numberOfSpotLines; i++) {
-			SpotLineManager spotLineManager = new SpotLineManager();
-			spotLineManager.generate(numberSpotsByType);
-			spotLines.add(spotLineManager);
+			addSpotLine(numberSpotsByType);
+			updateTotalFreeSpots(numberSpotsByType);
 		}
 		 return spotLines;
 	}
 
-	public boolean parkVehicleInFloorSpot(VehiclesType motorcycle) {
+	private void updateTotalFreeSpots(Map<SpotType, Integer> numberSpotsByType) {
+		if(totalFreeSpotsByType.isEmpty()) {
+			numberSpotsByType.forEach((key, value)-> totalFreeSpotsByType.put(key, value));
+		} else {
+			numberSpotsByType.forEach((key, value)-> totalFreeSpotsByType.replace(key, totalFreeSpotsByType.get(key) + value));
+		}
+	}
+
+
+
+	private void addSpotLine(Map<SpotType, Integer> numberSpotsByType) {
+		SpotLineManager spotLineManager = new SpotLineManager();
+		spotLineManager.generate(numberSpotsByType);
+		spotLines.add(spotLineManager);
+	}
+
+	private void reset() {
+		totalFreeSpotsByType = new HashMap<>();
+		spotLines = new ArrayList<SpotLineManager>();
+	}
+
+	public boolean parkVehicleInFloorSpot(VehiclesType vehicle) {
 		
-		Optional<SpotLineManager> motoIsCorrectlyParked = spotLines.stream().filter(lineManager -> lineManager.parkVehicleInSpotLine(motorcycle)).findFirst();
+		Optional<SpotLineManager> motoIsCorrectlyParked = checkSpotLinesToGetTheFirstOneWhereVehicleIsParked(vehicle);
 		return motoIsCorrectlyParked.isPresent();
 		
+	}
+
+	private Optional<SpotLineManager> checkSpotLinesToGetTheFirstOneWhereVehicleIsParked(VehiclesType vehicle) {
+		return spotLines.stream()
+				.filter(lineManager -> lineManager.parkVehicleInSpotLine(vehicle)).findFirst();
 	}
 
 	public Map<SpotType, Integer> getTotalFreeSpotsByType() {
