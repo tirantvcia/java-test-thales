@@ -9,41 +9,97 @@ import org.junit.jupiter.api.Test;
 
 public class SpotLineInformationTest {
 
+    @Test
+    void generateInformationVehiclesForLargePlaces() {
+	      Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+	      numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
+        SpotLineInformation spotLineInformation = new SpotLineInformation();
+        spotLineInformation.setNumberFreeSpotyByType(numberSpotsByType);
+        assertEquals("QUEDA 1 PLAZA PARA COCHE O MOTO", spotLineInformation.showPlacesForVehiclesInfo());
 
+    }
 
     @Test
-    void generateLineOfFiveRowsToParkOnlyOneBus() {
+    void generateInformationVehiclesForMotoPlaces() {
+	      Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+	      numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
+        SpotLineInformation spotLineInformation = new SpotLineInformation();
+        spotLineInformation.setNumberFreeSpotyByType(numberSpotsByType);
+        assertEquals("QUEDA 1 PLAZA PARA MOTO", spotLineInformation.showPlacesForVehiclesInfo());
+
+    }
+    
+    @Test
+    void generateInformationVehiclesForCompactPlaces() {
+	      Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+	      numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
+        SpotLineInformation spotLineInformation = new SpotLineInformation();
+        spotLineInformation.setNumberFreeSpotyByType(numberSpotsByType);
+        assertEquals("QUEDA 1 PLAZA PARA COCHE O MOTO", spotLineInformation.showPlacesForVehiclesInfo());
+
+    }
+    @Test
+    void generateInformationVehiclesForTwoMotos() {
+	      Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+	      numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 2);
+        SpotLineInformation spotLineInformation = new SpotLineInformation();
+        spotLineInformation.setNumberFreeSpotyByType(numberSpotsByType);
+        assertEquals("QUEDAN 2 PLAZAS PARA MOTO", spotLineInformation.showPlacesForVehiclesInfo());
+
+    }
+    
+    @Test
+    void generateInformationVehiclesForTwoCompactPlaces() {
+	      Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+	      numberSpotsByType.put(SpotType.COMPACT_TYPE, 2);
+        SpotLineInformation spotLineInformation = new SpotLineInformation();
+        spotLineInformation.setNumberFreeSpotyByType(numberSpotsByType);
+        assertEquals("QUEDAN 2 PLAZAS PARA COCHE O MOTO", spotLineInformation.showPlacesForVehiclesInfo());
+
+    }
+
+    
+    @Test
+    void generateInformationVehiclesForFiveLargePlaces() {
 	      Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
 	      numberSpotsByType.put(SpotType.LARGE_TYPE, 5);
         SpotLineInformation spotLineInformation = new SpotLineInformation();
         spotLineInformation.setNumberFreeSpotyByType(numberSpotsByType);
-        assertEquals("QUEDA 1 PLAZA PARA AUTOBUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        assertEquals("QUEDA 1 PLAZA PARA AUTOBUS O 5 PLAZAS PARA COCHE O MOTO", spotLineInformation.showPlacesForVehiclesInfo());
 
     }
+    
+    @Test
+    void generateInformationVehiclesForFourLargePlaces() {
+	      Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+	      numberSpotsByType.put(SpotType.LARGE_TYPE, 4);
+        SpotLineInformation spotLineInformation = new SpotLineInformation();
+        spotLineInformation.setNumberFreeSpotyByType(numberSpotsByType);
+        assertEquals("QUEDAN 4 PLAZAS PARA COCHE O MOTO", spotLineInformation.showPlacesForVehiclesInfo());
+
+    }
+    
+    @Test
+    void generateInformationVehiclesForTenLargePlaces() {
+	      Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+	      numberSpotsByType.put(SpotType.LARGE_TYPE, 10);
+        SpotLineInformation spotLineInformation = new SpotLineInformation();
+        spotLineInformation.setNumberFreeSpotyByType(numberSpotsByType);
+        assertEquals("QUEDAN 2 PLAZAS PARA AUTOBUS O 10 PLAZAS PARA COCHE O MOTO", spotLineInformation.showPlacesForVehiclesInfo());
+
+    }
+    
+    
 //    @Test
-//    void generateLineRowsWhereCantParkBus() {
-//        SpotLine manager = new SpotLine();
-//        VehiclesType bus = VehiclesType.BUS;
-//        int numberOfRows = 4;
-//        List<Spot> listOfRows = manager.generateRowsOfSameType(SpotType.LARGE_TYPE, numberOfRows);
-//        assertEquals(true, listOfRows != null && !listOfRows.isEmpty() && listOfRows.size() == numberOfRows);
-//        assertEquals(false, manager.parkVehicle(0, bus));
+//    void generateInformationVehiclesForTwoCompactPlaces() {
+//	      Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+//	      numberSpotsByType.put(SpotType.COMPACT_TYPE, 2);
+//        SpotLineInformation spotLineInformation = new SpotLineInformation();
+//        spotLineInformation.setNumberFreeSpotyByType(numberSpotsByType);
+//        assertEquals("QUEDA 2 PLAZAS PARA COCHE O MOTO", spotLineInformation.showPlacesForVehiclesInfo());
 //
-//        manager.reset();
-//        listOfRows = manager.generateRowsOfSameType(SpotType.COMPACT_TYPE, 5);
-//        assertEquals(true, listOfRows != null && !listOfRows.isEmpty() && listOfRows.size() == 5);
-//        assertEquals(false, manager.parkVehicle(0, bus));
 //    }
-//    @Test
-//    void parkMotorCyleInSpot() {
-//        VehiclesType moto = VehiclesType.MOTORCYCLE;
-//        SpotLine manager = new SpotLine();
-//        int numberOfRows = 1;
-//        int position = 0;
-//        manager.generateRowsOfSameType(SpotType.MOTORCYCLE_TYPE, numberOfRows);
-//        assertEquals(true, manager.parkVehicle(position, moto));
-//        assertEquals(false, manager.parkVehicle(position, moto));
-//    }
+    
 //    @Test
 //    void parkCarInSpot() {
 //        VehiclesType car = VehiclesType.CAR;
