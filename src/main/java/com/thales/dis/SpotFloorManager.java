@@ -9,14 +9,14 @@ import java.util.Optional;
 public class SpotFloorManager {
 	
 	
-	ArrayList<SpotLineManager> spotLines = null;
+	ArrayList<SpotLine> spotLines = null;
 	Map<SpotType, Integer> totalFreeSpotsByType = null;
 	
 	public SpotFloorManager() {
 		
 	}
 
-	public List<SpotLineManager> generate(int numberOfSpotLines, Map<SpotType, Integer> numberSpotsByType) {
+	public List<SpotLine> generate(int numberOfSpotLines, Map<SpotType, Integer> numberSpotsByType) {
 		reset();
 		
 		for(int i = 0; i < numberOfSpotLines; i++) {
@@ -37,24 +37,24 @@ public class SpotFloorManager {
 
 
 	private void addSpotLine(Map<SpotType, Integer> numberSpotsByType) {
-		SpotLineManager spotLineManager = new SpotLineManager();
+		SpotLine spotLineManager = new SpotLine();
 		spotLineManager.generate(numberSpotsByType);
 		spotLines.add(spotLineManager);
 	}
 
 	private void reset() {
 		totalFreeSpotsByType = new HashMap<>();
-		spotLines = new ArrayList<SpotLineManager>();
+		spotLines = new ArrayList<SpotLine>();
 	}
 
 	public boolean parkVehicleInFloorSpot(VehiclesType vehicle) {
 		
-		Optional<SpotLineManager> motoIsCorrectlyParked = checkSpotLinesToGetTheFirstOneWhereVehicleIsParked(vehicle);
+		Optional<SpotLine> motoIsCorrectlyParked = checkSpotLinesToGetTheFirstOneWhereVehicleIsParked(vehicle);
 		return motoIsCorrectlyParked.isPresent();
 		
 	}
 
-	private Optional<SpotLineManager> checkSpotLinesToGetTheFirstOneWhereVehicleIsParked(VehiclesType vehicle) {
+	private Optional<SpotLine> checkSpotLinesToGetTheFirstOneWhereVehicleIsParked(VehiclesType vehicle) {
 		return spotLines.stream()
 				.filter(lineManager -> lineManager.parkVehicleInSpotLine(vehicle)).findFirst();
 	}

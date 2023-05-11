@@ -5,30 +5,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class SpotLineManager {
+public class SpotLine {
     public static final int NUMBER_OF_PLACES_FOR_BUSES = 5;
     public static final int NUMBER_OF_PLACES_FOR_MOTO_OR_CAR = 1;
     private List<Spot> rows;
-    private Map<SpotType, Integer> numberFreeSpotyByType;
 
-    public SpotLineManager(List<Spot> rows) {
+    public SpotLine(List<Spot> rows) {
         this.rows = rows;
     }
 
-    public SpotLineManager() {
+    public SpotLine() {
         this.rows = new ArrayList<>();
-        this.numberFreeSpotyByType = null;
     }
 
     public void reset () {
         rows = new ArrayList<>();
-        this.numberFreeSpotyByType = null;
     }
 
     public List<Spot> generate (Map<SpotType, Integer> spotDitributionByType) {
     	reset();
         spotDitributionByType.forEach((type, numElments) ->  generateRowsOfSameType(type, numElments));
-        this.numberFreeSpotyByType = spotDitributionByType;
         return rows;
     }
 
@@ -94,29 +90,20 @@ public class SpotLineManager {
 
     }
 
-    public boolean parkVehicleInSpotLine(VehiclesType car) {
+    public boolean parkVehicleInSpotLine(VehiclesType vehicle) {
         int position = 0;
         boolean vehicleIsParked = false;
         do {
-            vehicleIsParked = parkVehicle(position, car);
+            vehicleIsParked = parkVehicle(position, vehicle);
             if(!vehicleIsParked) {
                 position ++;
             }
         } while(!vehicleIsParked && position < rows.size());
 
-        if(vehicleIsParked) {
-            updateNumberOfFreePositions(position, car);
-            return true;
-        }
-        return false;
+        return vehicleIsParked;
     }
 
-    private void updateNumberOfFreePositions(int position, VehiclesType vehicle) {
-        int numberOfPositionsToBeEngaged = (vehicle.equals(VehiclesType.BUS))?NUMBER_OF_PLACES_FOR_BUSES: NUMBER_OF_PLACES_FOR_MOTO_OR_CAR;
-        Spot spot = rows.get(position);
-        Integer elements = numberFreeSpotyByType.get(spot.getType());
-        numberFreeSpotyByType.replace(spot.getType(), elements - numberOfPositionsToBeEngaged);
-    }
+
 
     public List<Spot> getRows() {
         return rows;
@@ -125,14 +112,5 @@ public class SpotLineManager {
     public void setRows(List<Spot> rows) {
         this.rows = rows;
     }
-
-    public Map<SpotType, Integer> getNumberFreeSpotyByType() {
-        return numberFreeSpotyByType;
-    }
-
-    public void setNumberFreeSpotyByType(Map<SpotType, Integer> numberFreeSpotyByType) {
-        this.numberFreeSpotyByType = numberFreeSpotyByType;
-    }
-
 
 }
