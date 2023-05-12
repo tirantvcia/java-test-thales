@@ -15,88 +15,112 @@ public class SpotLineTest {
         VehiclesType moto = VehiclesType.MOTORCYCLE;
         SpotLine manager = new SpotLine();
         int numberOfRows = 1;
-        manager.generateRowsOfSameType(SpotType.MOTORCYCLE_TYPE, numberOfRows);
+        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(true, manager.parkVehicle(0, moto));
 
-        manager.reset();
-        manager.generateRowsOfSameType(SpotType.LARGE_TYPE, numberOfRows);
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.LARGE_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(true, manager.parkVehicle(0, moto));
 
-        manager.reset();
-        manager.generateRowsOfSameType(SpotType.COMPACT_TYPE, numberOfRows);
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(true, manager.parkVehicle(0, moto));
     }
 
     @Test
     void carOnlyCanParkInLargeAndCompactTypeOfSpot() {
+    	Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
         VehiclesType car = VehiclesType.CAR;
         int numberOfRows = 1;
         SpotLine manager = new SpotLine();
 
-        manager.generateRowsOfSameType(SpotType.MOTORCYCLE_TYPE, numberOfRows);
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(false, manager.parkVehicle(0, car));
 
-        manager.reset();
-        manager.generateRowsOfSameType(SpotType.LARGE_TYPE, numberOfRows);
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.LARGE_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(true, manager.parkVehicle(0, car));
-        manager.reset();
-        manager.generateRowsOfSameType(SpotType.COMPACT_TYPE, numberOfRows);
+        
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(true, manager.parkVehicle(0, car));
 
     }
 
     @Test
     void generateLineOfFiveRowsToParkOnlyOneBus() {
+    	Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
         int numberRows = 5;
         SpotLine manager = new SpotLine();
         VehiclesType bus = VehiclesType.BUS;
-        List<Spot> listOfRows = manager.generateRowsOfSameType(SpotType.LARGE_TYPE, 5);
-        assertEquals(true, listOfRows != null && !listOfRows.isEmpty() && listOfRows.size() == 5);
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.LARGE_TYPE, numberRows);
+        manager.generate(numberSpotsByType);
         assertEquals(true, manager.parkVehicle(0, bus));
 
     }
     @Test
     void generateLineRowsWhereCantParkBus() {
+    	Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
         SpotLine manager = new SpotLine();
         VehiclesType bus = VehiclesType.BUS;
         int numberOfRows = 4;
-        List<Spot> listOfRows = manager.generateRowsOfSameType(SpotType.LARGE_TYPE, numberOfRows);
-        assertEquals(true, listOfRows != null && !listOfRows.isEmpty() && listOfRows.size() == numberOfRows);
+        
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.LARGE_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(false, manager.parkVehicle(0, bus));
 
-        manager.reset();
-        listOfRows = manager.generateRowsOfSameType(SpotType.COMPACT_TYPE, 5);
-        assertEquals(true, listOfRows != null && !listOfRows.isEmpty() && listOfRows.size() == 5);
+        
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(false, manager.parkVehicle(0, bus));
     }
     @Test
     void parkMotorCyleInSpot() {
+    	Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
         VehiclesType moto = VehiclesType.MOTORCYCLE;
         SpotLine manager = new SpotLine();
         int numberOfRows = 1;
         int position = 0;
-        manager.generateRowsOfSameType(SpotType.MOTORCYCLE_TYPE, numberOfRows);
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(true, manager.parkVehicle(position, moto));
         assertEquals(false, manager.parkVehicle(position, moto));
     }
     @Test
     void parkCarInSpot() {
+    	Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
         VehiclesType car = VehiclesType.CAR;
         SpotLine manager = new SpotLine();
         int numberOfRows = 1;
         int position = 0;
-        manager.generateRowsOfSameType(SpotType.COMPACT_TYPE, numberOfRows);
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(true, manager.parkVehicle(position, car));
         assertEquals(false, manager.parkVehicle(position, car));
     }
 
     @Test
     void parkBusInSpot() {
+    	Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
         VehiclesType bus = VehiclesType.BUS;
         SpotLine manager = new SpotLine();
         int numberOfRows = 6;
         int position = 0;
-        manager.generateRowsOfSameType(SpotType.LARGE_TYPE, numberOfRows);
+        numberSpotsByType.clear();
+        numberSpotsByType.put(SpotType.LARGE_TYPE, numberOfRows);
+        manager.generate(numberSpotsByType);
         assertEquals(true, manager.parkVehicle(position, bus));
         assertEquals(false, manager.parkVehicle(position, bus));
     }

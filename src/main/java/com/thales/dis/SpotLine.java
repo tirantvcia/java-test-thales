@@ -28,7 +28,7 @@ public class SpotLine {
         return rows;
     }
 
-    public List<Spot> generateRowsOfSameType(SpotType spotType, int numberOfRows) {
+    private List<Spot> generateRowsOfSameType(SpotType spotType, int numberOfRows) {
 
         for(int i = 0; i < numberOfRows; i++) {
             Spot spot = Spot.create(spotType.getType());
