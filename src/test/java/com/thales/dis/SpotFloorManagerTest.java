@@ -10,30 +10,6 @@ import org.junit.jupiter.api.Test;
 
 public class SpotFloorManagerTest {
     @Test
-    void generationOfParkingFloorWithOnlyOneSpotLine() {
-        SpotFloorManager manager = new SpotFloorManager();
-        int numberOfSpotLines = 1;
-        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
-        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
-        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
-        numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
-        List<SpotLine> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(1, spotslinesResult.size());
-    }
-    @Test
-    void generationOfParkingFloorWithOnlyOneSpotLineWithDistributionIndicatedInMap() {
-        SpotFloorManager manager = new SpotFloorManager();
-        int numberOfSpotLines = 1;
-        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
-        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
-        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
-        numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
-        List<SpotLine> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(1, spotslinesResult.size());
-//        assertEquals(3, spotslinesResult.get(0).getNumberFreeSpotyByType().size());
-//        spotslinesResult.get(0).getNumberFreeSpotyByType().forEach((type, numElments) ->  assertEquals(1, numElments));
-    }
-    @Test
     void generationOfParkingFloorWithSeveralSpotLineWithSameDistributionIndicatedInMap() {
         SpotFloorManager manager = new SpotFloorManager();
         int numberOfSpotLines = 3;
@@ -41,13 +17,7 @@ public class SpotFloorManagerTest {
         numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
         numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
         numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
-        List<SpotLine> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(3, spotslinesResult.size());
-//        spotslinesResult.stream().forEach(spotLineManager -> {
-//        	assertEquals(3, spotLineManager.getNumberFreeSpotyByType().size());
-//        });
-//        
-//        spotslinesResult.stream().forEach(spotLineManager -> spotLineManager.getNumberFreeSpotyByType().forEach((type, numElments) ->  assertEquals(1, numElments)));
+        manager.generate(numberOfSpotLines, numberSpotsByType);
     }
     
     @Test
@@ -56,11 +26,11 @@ public class SpotFloorManagerTest {
         int numberOfSpotLines = 2;
         Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
         numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
-        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
-        numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
-        List<SpotLine> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(2, spotslinesResult.size());
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, 0);
+        numberSpotsByType.put(SpotType.LARGE_TYPE, 0);
+        manager.generate(numberOfSpotLines, numberSpotsByType);
         assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.MOTORCYCLE));
+        assertEquals(false, manager.parkVehicleInFloorSpot(VehiclesType.CAR));
          
     }
     
@@ -72,8 +42,8 @@ public class SpotFloorManagerTest {
         numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
         numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
         numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
-        List<SpotLine> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(2, spotslinesResult.size());
+        List<Spot> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
+        assertEquals(6, spotslinesResult.size());
         assertEquals(false, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
          
     }
@@ -86,8 +56,7 @@ public class SpotFloorManagerTest {
         numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
         numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
         numberSpotsByType.put(SpotType.LARGE_TYPE, 5);
-        List<SpotLine> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(2, spotslinesResult.size());
+        manager.generate(numberOfSpotLines, numberSpotsByType);
         assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
         assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
         assertEquals(false, manager.parkVehicleInFloorSpot(VehiclesType.BUS)); 
@@ -100,8 +69,7 @@ public class SpotFloorManagerTest {
         numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
         numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
         numberSpotsByType.put(SpotType.LARGE_TYPE, 5);
-        List<SpotLine> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(2, spotslinesResult.size());
+        manager.generate(numberOfSpotLines, numberSpotsByType);
         assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
         assertEquals(true, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
         assertEquals(false, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
@@ -116,25 +84,25 @@ public class SpotFloorManagerTest {
         numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
         numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
         numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
-        List<SpotLine> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(2, spotslinesResult.size());
-        assertEquals(2, manager.getTotalFreeSpotsByType().get(SpotType.MOTORCYCLE_TYPE));
-        assertEquals(2, manager.getTotalFreeSpotsByType().get(SpotType.COMPACT_TYPE));
-        assertEquals(2, manager.getTotalFreeSpotsByType().get(SpotType.LARGE_TYPE));
+        manager.generate(numberOfSpotLines, numberSpotsByType);
+        assertEquals(6, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.MOTORCYCLE));
+        assertEquals(4, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.CAR));
+        assertEquals(0, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.BUS));
     }
     
-//    @Test
-//    void UpdateParkingFloorInformationWhenParkOneCar() {
-//        SpotFloorManager manager = new SpotFloorManager();
-//        int numberOfSpotLines = 2;
-//        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
-//        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
-//        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
-//        numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
-//        List<SpotLine> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-//        assertEquals(2, spotslinesResult.size());
-//        assertEquals(2, manager.getTotalFreeSpotsByType().get(SpotType.MOTORCYCLE_TYPE));
-//        manager.parkVehicleInFloorSpot(VehiclesType.CAR);
-//        assertEquals(true, (manager.getTotalFreeSpotsByType().get(SpotType.COMPACT_TYPE) < 2) || (manager.getTotalFreeSpotsByType().get(SpotType.LARGE_TYPE) < 2));
-//    }
+    @Test
+    void UpdateParkingFloorInformationWhenParkOneCar() {
+        SpotFloorManager manager = new SpotFloorManager();
+        int numberOfSpotLines = 2;
+        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
+        numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
+        manager.generate(numberOfSpotLines, numberSpotsByType);
+        assertEquals(6, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.MOTORCYCLE));
+        assertEquals(4, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.CAR));
+        boolean parkVehicleInFloorSpot = manager.parkVehicleInFloorSpot(VehiclesType.CAR);
+        assertEquals(true, parkVehicleInFloorSpot);
+        assertEquals(3, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.CAR));
+    }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import io.vavr.control.Either;
+
 public class SpotLine {
     public static final int NUMBER_OF_PLACES_FOR_BUSES = 5;
     public static final int NUMBER_OF_PLACES_FOR_MOTO_OR_CAR = 1;
@@ -18,7 +20,11 @@ public class SpotLine {
         this.rows = new ArrayList<>();
     }
 
-    public void reset () {
+    public SpotLine(Map<SpotType, Integer> numberSpotsByType) {
+		generate(numberSpotsByType);
+	}
+
+	public void reset () {
         rows = new ArrayList<>();
     }
 
@@ -90,7 +96,7 @@ public class SpotLine {
 
     }
 
-    public boolean parkVehicleInSpotLine(VehiclesType vehicle) {
+    public Either<Boolean, Spot> parkVehicleInSpotLine(VehiclesType vehicle) {
         int position = 0;
         boolean vehicleIsParked = false;
         do {
@@ -100,7 +106,8 @@ public class SpotLine {
             }
         } while(!vehicleIsParked && position < rows.size());
 
-        return vehicleIsParked;
+        
+        return (vehicleIsParked)?Either.right(rows.get(position)): Either.left(false);
     }
 
 

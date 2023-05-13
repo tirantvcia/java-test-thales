@@ -148,7 +148,7 @@ public class SpotLineTest {
         SpotLine manager = new SpotLine();
         List<Spot> spotslistResult = manager.generate(numberSpotsByType);
         assertEquals(3, spotslistResult.size());
-        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR));
+        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR).isRight());
 //        assertEquals(true, manager.getNumberFreeSpotyByType().get(SpotType.COMPACT_TYPE) == 0
 //        || manager.getNumberFreeSpotyByType().get(SpotType.LARGE_TYPE) == 0);
 
@@ -163,8 +163,8 @@ public class SpotLineTest {
         SpotLine manager = new SpotLine();
         List<Spot> spotslistResult = manager.generate(numberSpotsByType);
         assertEquals(3, spotslistResult.size());
-        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR));
-        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR));
+        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR).isRight());
+        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR).isRight());
 //        assertEquals(true, manager.getNumberFreeSpotyByType().get(SpotType.COMPACT_TYPE) == 0
 //                && manager.getNumberFreeSpotyByType().get(SpotType.LARGE_TYPE) == 0);
 
@@ -178,9 +178,9 @@ public class SpotLineTest {
         SpotLine manager = new SpotLine();
         List<Spot> spotslistResult = manager.generate(numberSpotsByType);
         assertEquals(3, spotslistResult.size());
-        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR));
-        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR));
-        assertEquals(false, manager.parkVehicleInSpotLine(VehiclesType.CAR));
+        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR).isRight());
+        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.CAR).isRight());
+        assertEquals(false, manager.parkVehicleInSpotLine(VehiclesType.CAR).isRight());
 
     }
 
@@ -191,7 +191,7 @@ public class SpotLineTest {
         SpotLine manager = new SpotLine();
         List<Spot> spotslistResult = manager.generate(numberSpotsByType);
         assertEquals(5, spotslistResult.size());
-        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.BUS));
+        assertEquals(true, manager.parkVehicleInSpotLine(VehiclesType.BUS).isRight());
 //        assertEquals(true, manager.getNumberFreeSpotyByType().get(SpotType.LARGE_TYPE) == 0);
 
 

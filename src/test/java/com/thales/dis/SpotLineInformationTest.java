@@ -18,7 +18,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "1 SPOT FOR MOTOS\n"
         		+ "1 SPOT FOR CARS\n"
-        		+ "0 SPOTS FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "0 SPOTS FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString());
 
     }
 
@@ -31,7 +31,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "1 SPOT FOR MOTOS\n"
         		+ "0 SPOTS FOR CARS\n"
-        		+ "0 SPOTS FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "0 SPOTS FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString());
 
     }
     
@@ -44,7 +44,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "1 SPOT FOR MOTOS\n"
         		+ "1 SPOT FOR CARS\n"
-        		+ "0 SPOTS FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "0 SPOTS FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString());
 
     }
     @Test
@@ -56,7 +56,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "2 SPOTS FOR MOTOS\n"
         		+ "0 SPOTS FOR CARS\n"
-        		+ "0 SPOTS FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "0 SPOTS FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString());
 
     }
     
@@ -69,7 +69,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "2 SPOTS FOR MOTOS\n"
         		+ "2 SPOTS FOR CARS\n"
-        		+ "0 SPOTS FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "0 SPOTS FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString());
 
 
     }
@@ -84,7 +84,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "5 SPOTS FOR MOTOS\n"
         		+ "5 SPOTS FOR CARS\n"
-        		+ "1 SPOT FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "1 SPOT FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString());
 
 
     }
@@ -98,7 +98,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "4 SPOTS FOR MOTOS\n"
         		+ "4 SPOTS FOR CARS\n"
-        		+ "0 SPOTS FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "0 SPOTS FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString().toString());
 
     }
     
@@ -111,7 +111,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "10 SPOTS FOR MOTOS\n"
         		+ "10 SPOTS FOR CARS\n"
-        		+ "2 SPOTS FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "2 SPOTS FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString());
     }
     
     @Test
@@ -124,7 +124,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "2 SPOTS FOR MOTOS\n"
         		+ "2 SPOTS FOR CARS\n"
-        		+ "0 SPOTS FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "0 SPOTS FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString());
 
     }
     
@@ -140,7 +140,7 @@ public class SpotLineInformationTest {
         assertEquals("THERE ARE:\n"
         		+ "8 SPOTS FOR MOTOS\n"
         		+ "7 SPOTS FOR CARS\n"
-        		+ "1 SPOT FOR BUSES", spotLineInformation.showPlacesForVehiclesInfo());
+        		+ "1 SPOT FOR BUSES", spotLineInformation.getVehiclesPossibility”ccupation().toString());
 
     }
     

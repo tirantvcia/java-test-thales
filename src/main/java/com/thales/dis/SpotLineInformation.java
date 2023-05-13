@@ -1,5 +1,6 @@
 package com.thales.dis;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SpotLineInformation {
@@ -9,15 +10,18 @@ public class SpotLineInformation {
 
 	private Map<SpotType, Integer> numberFreeSpotyByType;
 
-	private VehiclesCapacityInFreeSpots vehicles;
+
 
 	public SpotLineInformation() {
 		reset();
 	}
 
+	public SpotLineInformation(Map<SpotType, Integer> numberSpotsByType) {
+		this.numberFreeSpotyByType = numberSpotsByType;
+	}
+
 	public void reset() {
-		this.numberFreeSpotyByType = null;
-		vehicles = new VehiclesCapacityInFreeSpots();
+		this.numberFreeSpotyByType = new HashMap<SpotType, Integer>();
 	}
 
 	public Map<SpotType, Integer> getNumberFreeSpotyByType() {
@@ -33,15 +37,11 @@ public class SpotLineInformation {
 				: NUMBER_OF_PLACES_FOR_MOTO_OR_CAR;
 		Integer elements = numberFreeSpotyByType.get(spot.getType());
 		numberFreeSpotyByType.replace(spot.getType(), elements - numberOfPositionsToBeEngaged);
+		
 	}
 
-	public String showPlacesForVehiclesInfo() {
-		vehicles = new VehiclesCapacityInFreeSpots();
-		numberFreeSpotyByType.forEach((type, number) -> {
-			vehicles.addVehiclesByFreeSpotType(type, number);
-		});
-
-		return vehicles.toString();
+	public VehiclesCapacityInFreeSpots getVehiclesPossibility”ccupation() {
+		return new VehiclesCapacityInFreeSpots(numberFreeSpotyByType);
 	}
-
+	
 }
