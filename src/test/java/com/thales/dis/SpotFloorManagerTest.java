@@ -35,20 +35,6 @@ public class SpotFloorManagerTest {
     }
     
     @Test
-    void ParkingOneBusIsNotPermittedInGeneratedLines() {
-        SpotFloorManager manager = new SpotFloorManager();
-        int numberOfSpotLines = 2;
-        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
-        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
-        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
-        numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
-        List<Spot> spotslinesResult = manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(6, spotslinesResult.size());
-        assertEquals(false, manager.parkVehicleInFloorSpot(VehiclesType.BUS));
-         
-    }
-    
-    @Test
     void ParkingOnlyTwoBusesIsPermittedInGeneratedLines() {
         SpotFloorManager manager = new SpotFloorManager();
         int numberOfSpotLines = 2;

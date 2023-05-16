@@ -1,6 +1,5 @@
 package com.thales.dis;
 
-import java.util.List;
 import java.util.Map;
 
 import io.vavr.control.Either;
@@ -14,15 +13,31 @@ public class SpotLineManager {
 	
 	
 	public SpotLineManager() {
-		spotLine = new SpotLine();
-		vehiclesCapacityInfo = new SpotLineInformation();
 	}
 	
+
+
+
+
+
+	public SpotLineManager(SpotLine spotLine, SpotLineInformation vehiclesCapacityInfo) {
+		super();
+		this.spotLine = spotLine;
+		this.vehiclesCapacityInfo = vehiclesCapacityInfo;
+	}
+
+
+
+
+
 
 	public SpotLineManager(Map<SpotType, Integer> numberSpotsByType) {
 		vehiclesCapacityInfo = new SpotLineInformation(numberSpotsByType);
 		spotLine = new SpotLine(numberSpotsByType);
 	}
+
+
+
 
 
 
@@ -60,6 +75,19 @@ public class SpotLineManager {
 
 	public VehiclesCapacityInFreeSpots getVehiclesPossibility”ccupation() {
 		return getVehiclesCapacityInfo().getVehiclesPossibility”ccupation();
+	}
+
+
+
+
+
+
+	public static Either<Object, SpotLineManager> create(SpotLine spotLine, SpotLineInformation spotLineInfo) {
+		try {
+			return Either.right(new SpotLineManager(spotLine, (SpotLineInformation) spotLineInfo.clone()));
+		} catch (CloneNotSupportedException e) {
+			return Either.left(null);
+		}
 	}
 
 

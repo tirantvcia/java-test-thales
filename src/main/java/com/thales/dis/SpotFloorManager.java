@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import io.vavr.control.Either;
+
 public class SpotFloorManager {
 	
 	
@@ -14,18 +16,20 @@ public class SpotFloorManager {
 		
 	}
 
-	public List<Spot> generate(int numberOfSpotLines, Map<SpotType, Integer> numberSpotsByType) {
+	public void generate(int numberOfSpotLines, Map<SpotType, Integer> numberSpotsByType) {
 		reset();
-		List<Spot> lineSpot = new ArrayList<Spot>();
 		for(int i = 0; i < numberOfSpotLines; i++) {
 			addSpotLine(numberSpotsByType);
 		}
-		 return lineSpot;
 	}
 
 	private void addSpotLine(Map<SpotType, Integer> numberSpotsByType) {
-		SpotLineManager spotLineManager = new SpotLineManager(numberSpotsByType);
-		spotLines.add(spotLineManager);
+		SpotLineInformation vehiclesCapacityInfo = new SpotLineInformation(numberSpotsByType);
+		SpotLine spotLine = new SpotLine(numberSpotsByType);
+		Either<Object, SpotLineManager> spotLineManagerInstance = SpotLineManager.create(spotLine, vehiclesCapacityInfo);
+		if(spotLineManagerInstance.isRight()) {
+			spotLines.add(spotLineManagerInstance.get());	
+		}
 	}
 
 	private void reset() {
@@ -35,8 +39,8 @@ public class SpotFloorManager {
 	
 	public boolean parkVehicleInFloorSpot(VehiclesType vehicle) {
 		
-		Optional<SpotLineManager> motoIsCorrectlyParked = getTheFirstOneSpotLinesWhereVehicleIsParked(vehicle);
-		return motoIsCorrectlyParked.isPresent();
+		Optional<SpotLineManager> vehicleIsCorrectlyParked = getTheFirstOneSpotLinesWhereVehicleIsParked(vehicle);
+		return vehicleIsCorrectlyParked.isPresent();
 		
 	}
 
