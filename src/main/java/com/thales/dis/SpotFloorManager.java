@@ -54,10 +54,11 @@ public class SpotFloorManager {
 		return Optional.ofNullable(managerWhereVehicleIsParked);
 	}
 
-	public Map<VehiclesType, Integer> getPossibleVehiclesCapacityByType() {
-		Optional<VehiclesCapacityInFreeSpots> reduce = spotLines.stream().map(sp -> sp.getVehiclesCapacityInfo().getVehiclesPossibilityÓccupation()).reduce((a, b) -> a.append(b));
+	public VehiclesCapacityInFreeSpots getPossibleVehiclesCapacityByType() {
+		Optional<VehiclesCapacityInFreeSpots> reduce = spotLines.stream().map(sp -> sp.getVehiclesCapacityInfo().getVehiclesPossibilityOccupation()).reduce((a, b) -> a.append(b));
 		if(reduce.isPresent()) {
-			return reduce.get().getVehicles();
+			VehiclesCapacityInFreeSpots vehiclesCapacityInFreeSpots = reduce.get();
+			return vehiclesCapacityInFreeSpots;
 		}
 		return null;
 	}

@@ -74,7 +74,7 @@ public class SpotLineManager {
 
 
 	public VehiclesCapacityInFreeSpots getVehiclesPossibility”ccupation() {
-		return getVehiclesCapacityInfo().getVehiclesPossibility”ccupation();
+		return getVehiclesCapacityInfo().getVehiclesPossibilityOccupation();
 	}
 
 

@@ -18,9 +18,9 @@ public class SpotFloorManagerTest {
         numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
         numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
         manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(9, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.MOTORCYCLE));
-        assertEquals(6, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.CAR));
-        assertEquals(0, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.BUS));
+        assertEquals(9, manager.getPossibleVehiclesCapacityByType().getVehicles().get(VehiclesType.MOTORCYCLE));
+        assertEquals(6, manager.getPossibleVehiclesCapacityByType().getVehicles().get(VehiclesType.CAR));
+        assertEquals(0, manager.getPossibleVehiclesCapacityByType().getVehicles().get(VehiclesType.BUS));
     }
     
     @Test
@@ -74,9 +74,9 @@ public class SpotFloorManagerTest {
         numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
         numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
         manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(6, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.MOTORCYCLE));
-        assertEquals(4, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.CAR));
-        assertEquals(0, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.BUS));
+        assertEquals(6, manager.getPossibleVehiclesCapacityByType().getVehicles().get(VehiclesType.MOTORCYCLE));
+        assertEquals(4, manager.getPossibleVehiclesCapacityByType().getVehicles().get(VehiclesType.CAR));
+        assertEquals(0, manager.getPossibleVehiclesCapacityByType().getVehicles().get(VehiclesType.BUS));
     }
     
     @Test
@@ -88,10 +88,10 @@ public class SpotFloorManagerTest {
         numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
         numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
         manager.generate(numberOfSpotLines, numberSpotsByType);
-        assertEquals(6, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.MOTORCYCLE));
-        assertEquals(4, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.CAR));
+        assertEquals(6, manager.getPossibleVehiclesCapacityByType().getVehicles().get(VehiclesType.MOTORCYCLE));
+        assertEquals(4, manager.getPossibleVehiclesCapacityByType().getVehicles().get(VehiclesType.CAR));
         boolean parkVehicleInFloorSpot = manager.parkVehicleInFloorSpot(VehiclesType.CAR);
         assertEquals(true, parkVehicleInFloorSpot);
-        assertEquals(3, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.CAR));
+        assertEquals(3, manager.getPossibleVehiclesCapacityByType().getVehicles().get(VehiclesType.CAR));
     }
 }

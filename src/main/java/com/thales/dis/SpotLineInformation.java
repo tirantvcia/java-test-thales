@@ -38,7 +38,7 @@ public class SpotLineInformation implements Cloneable {
 
 	}
 
-	public VehiclesCapacityInFreeSpots getVehiclesPossibility”ccupation() {
+	public VehiclesCapacityInFreeSpots getVehiclesPossibilityOccupation() {
 		return new VehiclesCapacityInFreeSpots(numberFreeSpotyByType);
 	}
 
