@@ -18,6 +18,9 @@ public class SpotFloorManagerTest {
         numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
         numberSpotsByType.put(SpotType.LARGE_TYPE, 1);
         manager.generate(numberOfSpotLines, numberSpotsByType);
+        assertEquals(9, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.MOTORCYCLE));
+        assertEquals(6, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.CAR));
+        assertEquals(0, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.BUS));
     }
     
     @Test
