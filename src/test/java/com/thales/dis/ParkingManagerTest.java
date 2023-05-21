@@ -1,5 +1,6 @@
 package com.thales.dis;
 
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -63,5 +64,37 @@ public class ParkingManagerTest {
         manager.generate(numberOfFloorSteps, numberOfSpotLinesPerFloor, numberSpotsByType);
         assertEquals(true, manager.parkVehicle(VehiclesType.MOTORCYCLE));
         assertEquals(11, manager.getPossibleVehiclesCapacityByType().get(VehiclesType.MOTORCYCLE));
+    }
+    @Test
+    void ParkingTwoBusesAndTwoCarsIsPermittedInGeneratedLines() {
+        ParkingManager manager = new ParkingManager();
+        int numberOfSpotLinesPerFloor = 1;
+        int numberOfFloorSteps = 2;
+        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
+        numberSpotsByType.put(SpotType.LARGE_TYPE, 5);
+        manager.generate(numberOfFloorSteps, numberOfSpotLinesPerFloor, numberSpotsByType);
+        assertEquals(true, manager.parkVehicle(VehiclesType.BUS));
+        assertEquals(true, manager.parkVehicle(VehiclesType.BUS));
+        assertEquals(false, manager.parkVehicle(VehiclesType.BUS));
+        assertEquals(true, manager.parkVehicle(VehiclesType.CAR));
+        assertEquals(true, manager.parkVehicle(VehiclesType.CAR));
+    }
+    @Test
+    void ParkingFourBusesIsPermittedInGeneratedLines() {
+        ParkingManager manager = new ParkingManager();
+        int numberOfSpotLinesPerFloor = 2;
+        int numberOfFloorSteps = 2;
+        Map<SpotType, Integer> numberSpotsByType = new HashMap<>();
+        numberSpotsByType.put(SpotType.MOTORCYCLE_TYPE, 1);
+        numberSpotsByType.put(SpotType.COMPACT_TYPE, 1);
+        numberSpotsByType.put(SpotType.LARGE_TYPE, 5);
+        manager.generate(numberOfFloorSteps, numberOfSpotLinesPerFloor, numberSpotsByType);
+        assertEquals(true, manager.parkVehicle(VehiclesType.BUS));
+        assertEquals(true, manager.parkVehicle(VehiclesType.BUS));
+        assertEquals(true, manager.parkVehicle(VehiclesType.BUS));
+        assertEquals(true, manager.parkVehicle(VehiclesType.BUS));
+        assertEquals(false, manager.parkVehicle(VehiclesType.BUS));
     }
 }
