@@ -25,10 +25,11 @@ public class ParkingManager {
         spotFloors.add(spotFloorManager);
     }
 
-    public Map<VehiclesType, Integer> getPossibleVehiclesCapacityByType() {
-        Optional<VehiclesCapacityInFreeSpots> reduce = spotFloors.stream().map(sp -> sp.getPossibleVehiclesCapacityByType()).reduce((a, b) -> a.append(b));
-        if(reduce.isPresent()) {
-            return reduce.get().getVehicles();
+    public VehiclesCapacityInFreeSpots getPossibleVehiclesCapacityByType() {
+        Optional<VehiclesCapacityInFreeSpots> optionalVehiclesCapacityInFreeSpots = spotFloors.stream().map(sp -> sp.getPossibleVehiclesCapacityByType()).reduce((a, b) -> a.append(b));
+        if(optionalVehiclesCapacityInFreeSpots.isPresent()) {
+            VehiclesCapacityInFreeSpots vehicles =  optionalVehiclesCapacityInFreeSpots.get();
+            return vehicles;
         }
         return null;
     }
