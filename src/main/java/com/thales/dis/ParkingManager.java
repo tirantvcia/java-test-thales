@@ -1,12 +1,13 @@
 package com.thales.dis;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class ParkingManager {
 
-    ArrayList<SpotFloorManager> spotFloors = null;
+    List<SpotFloorManager> spotFloors = null;
 
     public void generate(int numberOfFloorSteps, int numberOfSpotLinesPerFloor, Map<SpotType, Integer> numberSpotsByType) {
         reset();

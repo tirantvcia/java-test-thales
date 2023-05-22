@@ -1,6 +1,7 @@
 package com.thales.dis;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -9,7 +10,7 @@ import io.vavr.control.Either;
 public class SpotFloorManager {
 	
 	
-	ArrayList<SpotLineManager> spotLines = null;
+	List<SpotLineManager> spotLines = null;
 	
 	public SpotFloorManager() {
 		
